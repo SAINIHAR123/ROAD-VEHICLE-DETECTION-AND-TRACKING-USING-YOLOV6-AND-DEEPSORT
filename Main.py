@@ -15,7 +15,7 @@ if len(physical_devices) > 0:
 from absl import app, flags, logging
 from absl.flags import FLAGS
 import core.utils as utils
-from core.yolov4 import filter_boxes #load YOLOV6 package to filter boxes which contains vehicles
+from core.yolov4 import filter_boxes #load YOLOV4 package to filter boxes which contains vehicles
 from tensorflow.python.saved_model import tag_constants
 from core.config import cfg
 from PIL import Image
@@ -35,7 +35,7 @@ from collections import deque
 pts = [deque(maxlen=30) for _ in range(9999)]
 
 main = tkinter.Tk()
-main.title("Road Traffic Vehicle Detection and Tracking using Deep Learning with yolov6 and deepsort")
+main.title("Road Traffic Vehicle Detection and Tracking using Deep Learning with Custom-Collected and Public Datasets")
 main.geometry("1300x1200")
 
 global filename
@@ -63,7 +63,7 @@ def loadModel():
         
     pathlabel.config(text="YOLOv6 DeepSort Model Loaded")
     text.delete('1.0', END)
-    text.insert(END,"YOLOv6 DeepSort Model Loaded\n\n");
+    text.insert(END,"YOLOv4 DeepSort Model Loaded\n\n");
 
 def vehicleDetection():
     global model, encoder, tracker, config
@@ -150,8 +150,8 @@ def vehicleDetection():
             print(scores)
             if accuracy == 0:
                 accuracy = scores[0]
-                text.insert(END,"YoloV6 DeepSort Accuracy  : "+str(scores[0])+"\n\n")
-                text.insert(END,"YoloV6 DeepSort Precision : "+str(scores[1])+"\n\n")
+                text.insert(END,"YoloV4 DeepSort Accuracy  : "+str(scores[0])+"\n\n")
+                text.insert(END,"YoloV4 DeepSort Precision : "+str(scores[1])+"\n\n")
                 text.update_idletasks()
             tracker.predict()
             tracker.update(detections)
@@ -196,7 +196,7 @@ def close():
     
     
 font = ('times', 16, 'bold')
-title = Label(main, text='Road Traffic Vehicle Detection and Tracking using Deep Learning with yolov6 and deepsort',anchor=W, justify=CENTER)
+title = Label(main, text='Road Traffic Vehicle Detection and Tracking using Deep Learning with Custom-Collected and Public Datasets',anchor=W, justify=CENTER)
 title.config(bg='yellow4', fg='white')  
 title.config(font=font)           
 title.config(height=3, width=120)       
@@ -230,6 +230,5 @@ text.place(x=450,y=100)
 text.config(font=font1)
 
 
-main.config(bg='lightblue')
+main.config(bg='magenta3')
 main.mainloop()
-
